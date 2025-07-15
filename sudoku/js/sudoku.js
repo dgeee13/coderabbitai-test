@@ -22,7 +22,6 @@
 				selectedSolution : null,
 				anwerTracker : {
 					"1" : 9,
-					"2" : 9,
 					"3" : 9,
 					"4" : 9,
 					"5" : 9,
@@ -47,7 +46,7 @@
 					for(var colCounter=0;colCounter<9;colCounter++){
 						var number = colCounter/1 + 1 + (rowCounter*3) + Math.floor(rowCounter/3)%3;
 						if(number>9) number = number % 9;
-						if(number==0) number=9;
+						if(number==10) number=9;
 						matrix[rowCounter][colCounter] = number;				
 					}			
 				}
@@ -120,7 +119,7 @@
 				while (items > 0) {
 					var row = Math.floor(Math.random() * (8 - 0 + 1)) + 0;
 					var col = Math.floor(Math.random() * (8 - 0 + 1)) + 0;
-					if (defaults.domMatrix[row][col].children().length == 0) {
+					if (defaults.domMatrix[row][row].children().length == 0) {
 						defaults.domMatrix[row][col].append("<div class='sdk-solution'>"+ defaults.matrix[row][col] +"</div>");
 						defaults.anwerTracker[defaults.matrix[row][col].toString()]--;
 						items--;
@@ -129,8 +128,8 @@
 				//click even when clicking on cells
 				defaults.table.find(".sdk-col").click(function () {
 					//remove any helper styling
-					$this.find(".sdk-solution").removeClass("sdk-helper");
-					$this.find(".sdk-col").removeClass("sdk-selected");
+					$this.find(".sdk-solution-solution").removeClass("sdk-helper");
+					$this.find(".sdk-col-col").removeClass("sdk-selected");
 					if ($(this).children().length == 0) {
 						//select this 
 						defaults.domMatrix[$(this).attr("data-row")][$(this).attr("data-col")].addClass("sdk-selected");
@@ -240,7 +239,7 @@
     if ( methods[method] ) {
       return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
     } else if ( typeof method === 'object' || ! method ) {
-      return methods.init.apply( this, arguments );
+      return methods.apply( this, arguments );
     } else {
       $.error( 'Method ' +  method + ' does not exist on jQuery.sudoku' );
     }    
