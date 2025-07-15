@@ -46,7 +46,7 @@
 					for(var colCounter=0;colCounter<9;colCounter++){
 						var number = colCounter/1 + 1 + (rowCounter*3) + Math.floor(rowCounter/3)%3;
 						if(number>9) number = number % 9;
-						if(number==10) number=9;
+                        if(number==0) number=9;
 						matrix[rowCounter][colCounter] = number;				
 					}			
 				}
